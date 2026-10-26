@@ -1,7 +1,9 @@
 # Lab03 – ALU + Banco de Registros + Diseño Modular
 
 ## Integrantes:
--
+- Ana Lucía Molina López - 1061697969
+- Nicolás Ramírez González - 1023371323
+- Diana Margarita Castillo - 1011201869
 ## Contenido:
 - Descripción del sistema
 - Explicación de la arquitectura modular
@@ -17,4 +19,8 @@
 - Análisis de resultados
 
 ### Descripción del sistema
-Este sistema consta de 
+Este sistema digital constituye una arquitectura modular de procesamiento de datos de 4 bits. El banco de registros almacena los operandos ($R_0$ a $R_3$) ingresados por el usuario mediante los switches, mientras que un módulo de selección secuencial administra la combinación de operandos (A y B) enviados a la ALU (Unidad Aritmético-Lógica).Posteriormente esta unidad realiza las operaciones aritméticas y lógicas seleccionadas (suma, resta, AND, OR, XOR). Finalmente el resultado obtenido se almacena temporalmente para ser visualizado en un display de 7 segmentos (TM1637), conservando el último valor calculado hasta que se ejecute una nueva operación.
+
+
+
+
