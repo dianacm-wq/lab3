@@ -7,9 +7,9 @@
 ## Contenido:
 - Descripción del sistema
 - Explicación de la arquitectura modular
-    - ALU (alu.v)
     - Banco de registros (reg_bank.v)
     - Combinaciones de registros (comb_selector.v)
+    - ALU (alu.v)
     - Módulo de visualización (display_tm1637.v)
     - Módulo de integración (top.v)
 - Simulaciones
