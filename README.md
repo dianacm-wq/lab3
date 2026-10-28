@@ -25,8 +25,8 @@ Posteriormente, mediante el módulo de selección secuencial (comb _ selector ),
 
 Finalmente, el resultado de 4 bits generado por la ALU no altera el banco de registros; en su lugar, se captura y almacena temporalmente en un registro de salida (latch) únicamente al presionar el botón BTN[3]. Dicho resultado se visualiza en un display de 7 segmentos (TM1637), conservando el último valor calculado hasta que el usuario vuelva a presionar BTN3 para ejecutar una nueva operación.
 
-### Explicación de la arquitectura modular
-#### Banco de registros (reg_bank.v):
+## Explicación de la arquitectura modular
+### Banco de registros (reg_bank.v):
  Descripción
  
 Este módulo se encarga de almacenar los operandos de 4 bits que el usuario ingresa mediante los switches. Permite guardar datos en una memoria de 4 posiciones ($R_0$ a $R_3$) e incluye un puntero interno (estado) que avanza cíclicamente al presionar el botón de selección. Para brindar retroalimentación visual al usuario en la Zybo Z7, cada registro seleccionado se identifica con un color en el LED RGB:
@@ -40,15 +40,22 @@ Este módulo se encarga de almacenar los operandos de 4 bits que el usuario ingr
 
 Entradas y salidas del módulo:
 
-|   Señal   |  Tipo     | Ancho de bits |  Descripción |
-| --------- | --------- | ---------     |  ----------- |
-|  00       | R0        |    Rojo       |              |
-|  01       | R1        |    Verde      |              |
-|  10       | R2        |    Azul       |              |
-|  11       | R3        |   Blanco      |              |
+
+|   Señal      |  Tipo     | Ancho de bits |  Descripción                                                               |
+| ---------    | --------- | ---------     |  -----------                                                               |
+|  clk         | Entrada   |    1          |  Reloj principal del sistema (125 MHz).                                    |
+|  Reset       | Entrada   |    1          | Reinicia la selección  de estado a 0 ($R_0$).                              |
+|  data_in     | Entrada   |    4          | Dato de entrada de 4 bits proveniente de los switches (SW[3:0]).           |
+| write_addr   | Entrada   |    1          | Pulso del botón BTN0 para cambiar el registro seleccionado.                |
+| write_enable | Entrada   |    1          | Pulso del botón BTN1 para habilitar la escritura del dato en el registro.  |
+| addr_a       | Entrada   |    2          | Dirección de 2 bits para seleccionar el registro leído por la salida A.    |
+| addr_b       | Entrada   |    2          | Dirección de 2 bits para seleccionar el registro leído por la salida B.    |
+| out_a        | Salida    |    4          | Valor de 4 bits del registro seleccionado como operando A.                 | 
+| out_b        | Salida    |    4          | Valor de 4 bits del registro seleccionado como operando B.                 |
 
 
-Máquina de estados finitos: 
+### Combinaciones de registros (comb_selector.v):
+
 
 
 
