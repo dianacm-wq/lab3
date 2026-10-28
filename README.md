@@ -27,6 +27,8 @@ Finalmente, el resultado de 4 bits generado por la ALU no altera el banco de reg
 
 ### Explicación de la arquitectura modular
 #### Banco de registros (reg_bank.v):
+ Descripción
+ 
 Este módulo tiene la función de almacenar los operandos que el usuario ingresa en cada uno de los registros disponibles (4 registros). A continuación se muestran la secuencia binaria designada para cada registro, junto con su respectivo color de Led RGB:
 
 |   Código  |  Registro | Estado LED RGB|
@@ -36,8 +38,17 @@ Este módulo tiene la función de almacenar los operandos que el usuario ingresa
 |  10       | R2        |    Azul       |
 |  11       | R3        |   Blanco      | 
 
+Entradas y salidas
+
+|   Señal   |  Tipo     | Ancho de bits |  Descripción |
+| --------- | --------- | ---------     |  ----------- |
+|  00       | R0        |    Rojo       |              |
+|  01       | R1        |    Verde      |              |
+|  10       | R2        |    Azul       |              |
+|  11       | R3        |   Blanco      |              |
 
 
+Máquina de estados finitos: 
 
 
 
