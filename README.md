@@ -29,7 +29,7 @@ Finalmente, el resultado de 4 bits generado por la ALU no altera el banco de reg
 #### Banco de registros (reg_bank.v):
  Descripción
  
-Este módulo tiene la función de almacenar los operandos que el usuario ingresa en cada uno de los registros disponibles (4 registros). A continuación se muestran la secuencia binaria designada para cada registro, junto con su respectivo color de Led RGB:
+Este módulo se encarga de almacenar los operandos de 4 bits que el usuario ingresa mediante los switches. Permite guardar datos en una memoria de 4 posiciones ($R_0$ a $R_3$) e incluye un puntero interno (estado) que avanza cíclicamente al presionar el botón de selección. Para brindar retroalimentación visual al usuario en la Zybo Z7, cada registro seleccionado se identifica con un color en el LED RGB:
 
 |   Código  |  Registro | Estado LED RGB|
 | --------- | --------- | ---------     |
@@ -38,7 +38,7 @@ Este módulo tiene la función de almacenar los operandos que el usuario ingresa
 |  10       | R2        |    Azul       |
 |  11       | R3        |   Blanco      | 
 
-Entradas y salidas
+Entradas y salidas del módulo:
 
 |   Señal   |  Tipo     | Ancho de bits |  Descripción |
 | --------- | --------- | ---------     |  ----------- |
