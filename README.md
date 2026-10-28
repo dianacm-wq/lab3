@@ -27,7 +27,7 @@ Finalmente, el resultado de 4 bits generado por la ALU no altera el banco de reg
 
 ## Explicación de la arquitectura modular
 ### Banco de registros (reg_bank.v):
- Descripción
+ Descripción: 
  
 Este módulo se encarga de almacenar los operandos de 4 bits que el usuario ingresa mediante los switches. Permite guardar datos en una memoria de 4 posiciones ($R_0$ a $R_3$) e incluye un puntero interno (estado) que avanza cíclicamente al presionar el botón de selección. Para brindar retroalimentación visual al usuario en la Zybo Z7, cada registro seleccionado se identifica con un color en el LED RGB:
 
@@ -56,7 +56,9 @@ Entradas y salidas del módulo:
 
 ### Combinaciones de registros (comb_selector.v):
 
+Descripción: 
 
+El módulo de combinaciones actúa como el organizador y enrutador secuencial de datos dentro de la arquitectura. Su función principal es seleccionar cuál par de registros ($R_0$ a $R_3$) del banco de memoria será entregado a la ALU como los operandos de entrada $A$ y $B$.
 
 
 
