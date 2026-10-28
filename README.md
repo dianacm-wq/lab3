@@ -33,10 +33,10 @@ Este módulo se encarga de almacenar los operandos de 4 bits que el usuario ingr
 
 |   Código  |  Registro | Estado LED RGB|
 | --------- | --------- | ---------     |
-|  00       | R0        |    Rojo       |
-|  01       | R1        |    Verde      |
-|  10       | R2        |    Azul       |
-|  11       | R3        |   Blanco      | 
+|  00       | R0        |      (verde)  |
+|  01       | R1        |      (verde)  |
+|  10       | R2        |    (verde)    |
+|  11       | R3        |     (verde)   | 
 
 Entradas y salidas del módulo:
 
