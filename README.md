@@ -18,7 +18,7 @@
     - Funcionamiento en FPGA (Video)
 - Análisis de resultados
 
-### Descripción del sistema
+## Descripción del sistema
 Este sistema digital constituye una arquitectura modular de procesamiento de datos de 4 bits implementada en la tarjeta FPGA Zybo Z7. Inicialmente, el usuario ingresa un dato de 4 bits mediante los switches SW[3:0] para almacenarlo en el banco de registros ($R_0$ a $R_3$). El registro de destino se selecciona pulsando secuencialmente el botón BTN[0], e indicando la selección activa a través del LED RGB (asignando un color/estado específico para cada registro: $R_0$, $R_1$, $R_2$ y $R_3$). La escritura efectiva del dato en el registro seleccionado se realiza en el instante en que se presiona el botón BTN[1] ($write$ _ $enable$).
 
 Posteriormente, mediante el módulo de selección secuencial (comb _ selector ), el usuario define la pareja de operandos ($A$ y $B$) que se enviarán a la ALU. La conmutación entre las distintas combinaciones de registros se realiza mediante el botón BTN[2], mientras que los LEDs [3:0] se encienden para indicar visualmente cuáles registros están participando en la operación activa. La Unidad Aritmético-Lógica (ALU) recibe los operandos A y B y ejecuta la función seleccionada mediante los switches SW[2:0]. El repertorio de operaciones disponibles incluye operaciones aritméticas y lógicas: Suma, Resta, AND, OR, XOR, Desplazamiento e Identidad. 
