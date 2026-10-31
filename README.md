@@ -82,6 +82,18 @@ La ALU es un bloque combinacional que procesa las entradas de 4 bits a y b segú
 
 Tabla de Operaciones
 
+|Código de operación  |Operación    |Expresión Verilog           |Descripción                                                       |
+|---------------------|------------ |--------------------------- |--------------------------------------------------------          |
+|3'b000               |  Suma       | y = {1'b0, a} + {1 me0, b} |   Suma aritmética con acarreo en $Y[4]$.                         |
+|3'b001               |  Resta      | y = {1'b0, a} - {1'b0, b}  |   Resta aritmética entre $A$ y $B$.                              |
+|3'b010               |  AND        | y = {1'b0, a & b}          |   Operación lógica bit a bit AND.                                |
+|3'b011               |  OR         | y = {1'b0, a | b}          |   Operación lógica bit a bit OR.                                 |
+|3'b100               |  XOR        | y = {1'b0, a ^ b}          |   Operación lógica bit a bit XOR.                                |
+|3'b101               |  NOT        | y = {1'b0, ~a}             |   Inversión lógica bit a bit del operando $A$.                   |
+|3'b110               | Shift Left  | y = {a, 1'b0}              |   Desplazamiento a la izquierda de $A$ (multiplicación por 2).   |
+|3'b111               | Shift Right | y = {2'b00, a[3:1]}        |   Desplazamiento a la derecha de $A$ (división entera por 2).    |
+
+### Módulo Anti-rebote y Gestión de Botones (debounce.v y botones.v)
 
 
 
