@@ -95,11 +95,31 @@ Tabla de Operaciones
 
 ### Módulo Anti-rebote y Gestión de Botones (debounce.v y botones.v)
 
+Descripción
 
+Los botones mecánicos sufren de rebotes eléctricos al presionar. El módulo debounce implementa una máquina de estados finitos (FSM) asistida por un contador síncrono que filtra las transiciones espurias y entrega un único pulso limpio de un ciclo de reloj por cada pulsación real. El módulo botones instancia cuatro unidades de filtrado para acondicionar los botones BTN0 a BTN3.
 
+### Divisor de Frecuencia (DivFreq.v)
 
+DescripciónLa FPGA Zybo Z7 entrega un reloj principal de $125 \text{ MHz}$. El módulo DivFreq reduce la frecuencia de reloj mediante un contador de 10 bits ($0 \text{ a } 599$) para generar una señal DivCLK utilizable por los módulos de control y debounce, evitando lecturas incorrectas por alta velocidad de muestreo.
 
+### Módulo de visualización (display_tm1637.v)
 
+Descripción
+
+Recibe el resultado de 5 bits generado por la ALU y el pulso CambioAlu (BTN[3]). Al presionar BTN[3], se actualiza el registro interno de captura (latch) con el valor actual de ALUin. Este módulo se encarga de transmitir en formato de protocolo serie de dos hilos (CLKtm y DIO) la información hacia el controlador del display de 7 segmentos TM1637.
+
+### Módulo de integración (top.v)
+
+Descripción
+
+Es el módulo jerárquico superior (Top Module). No realiza lógica de procesamiento de datos directamente; su rol se limita a instanciar e interconectar las entradas y salidas físicas de la Zybo Z7 (Switches, Botones, LEDs, Display) con las entradas y salidas de los submódulos (DivFreq, botones, comb_selector, reg_bank, alu, display_tm1637).
+
+##  Simulaciones y Verificación
+
+###  Capturas obtenidas en GTKWave
+
+## Implementación en FPGA (Zybo Z7)
 
 
 
