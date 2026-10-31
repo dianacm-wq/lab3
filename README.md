@@ -21,7 +21,9 @@
 ## Descripción del sistema
 Este sistema digital constituye una arquitectura modular de procesamiento de datos de 4 bits implementada en la tarjeta FPGA Zybo Z7. Inicialmente, el usuario ingresa un dato de 4 bits mediante los switches SW[3:0] para almacenarlo en el banco de registros ($R_0$ a $R_3$). El registro de destino se selecciona pulsando secuencialmente el botón BTN[0], e indicando la selección activa a través del LED RGB (asignando un color/estado específico para cada registro: $R_0$, $R_1$, $R_2$ y $R_3$). La escritura efectiva del dato en el registro seleccionado se realiza en el instante en que se presiona el botón BTN[1] (write_enable).
 
-Posteriormente, mediante el módulo de selección secuencial (comb _ selector ), el usuario define la pareja de operandos ($A$ y $B$) que se enviarán a la ALU. La conmutación entre las distintas combinaciones de registros se realiza mediante el botón BTN[2], mientras que los LEDs [3:0] se encienden para indicar visualmente cuáles registros están participando en la operación activa. La Unidad Aritmético-Lógica (ALU) recibe los operandos A y B y ejecuta la función seleccionada mediante los switches SW[2:0]. El repertorio de operaciones disponibles incluye operaciones aritméticas y lógicas: Suma, Resta, AND, OR, XOR, Desplazamiento e Identidad. 
+Posteriormente, mediante el módulo de selección secuencial (comb _ selector ), el usuario define la pareja de operandos ($A$ y $B$) que se enviarán a la ALU. La conmutación entre las distintas combinaciones de registros se realiza mediante el botón BTN[2], mientras que los LEDs [3:0] se encienden para indicar visualmente cuáles registros están participando en la operación activa.
+
+La Unidad Aritmético-Lógica (ALU) recibe los operandos A y B y ejecuta la función seleccionada mediante los switches SW[2:0]. El repertorio de operaciones disponibles incluye operaciones aritméticas y lógicas: Suma, Resta, AND, OR, XOR, Desplazamiento e Identidad. 
 
 Finalmente, el resultado de 4 bits generado por la ALU no altera el banco de registros; en su lugar, se captura y almacena temporalmente en un registro de salida (latch) únicamente al presionar el botón BTN[3]. Dicho resultado se visualiza en un display de 7 segmentos (TM1637), conservando el último valor calculado hasta que el usuario vuelva a presionar BTN3 para ejecutar una nueva operación.
 
@@ -29,14 +31,15 @@ Finalmente, el resultado de 4 bits generado por la ALU no altera el banco de reg
 ### Banco de registros (reg_bank.v):
  Descripción: 
  
-Este módulo se encarga de almacenar los operandos de 4 bits que el usuario ingresa mediante los switches. Permite guardar datos en una memoria de 4 posiciones ($R_0$ a $R_3$) e incluye un puntero interno (estado) que avanza cíclicamente al presionar el botón de selección. Para brindar retroalimentación visual al usuario en la Zybo Z7, cada registro seleccionado se identifica con un color en el LED RGB:
+Este módulo se encarga de almacenar los operandos de 4 bits que el usuario ingresa mediante los switches. Permite guardar datos en una memoria síncrona de 4 posiciones ($R_0$ a $R_3$) e incluye un puntero interno (estado) que avanza cíclicamente de $0$ a $3$ al recibir un pulso en la señal write_addr (BTN[0]). La escritura solo ocurre en el registro apuntado si write_enable (BTN[1]) se encuentra activo.
+Para brindar retroalimentación visual al usuario en la Zybo Z7, cada registro seleccionado se identifica con un color en el LED RGB:
 
 |   Código  |  Registro | Estado LED RGB|
 | --------- | --------- | ---------     |
-|  00       | R0        |      (verde)  |
-|  01       | R1        |      (verde)  |
-|  10       | R2        |    (verde)    |
-|  11       | R3        |     (verde)   | 
+|  00       | R0        |      Rojo     |
+|  01       | R1        |      Verde    |
+|  10       | R2        |      Azul     |
+|  11       | R3        |      Blanco   | 
 
 Entradas y salidas del módulo:
 
@@ -58,7 +61,27 @@ Entradas y salidas del módulo:
 
 Descripción: 
 
-El módulo de combinaciones actúa como el organizador y enrutador secuencial de datos dentro de la arquitectura. Su función principal es seleccionar cuál par de registros ($R_0$ a $R_3$) del banco de memoria será entregado a la ALU como los operandos de entrada $A$ y $B$.
+El módulo actúa como el organizador y enrutador secuencial de datos dentro de la arquitectura. Su función principal es seleccionar qué par de registros ($R_0$ a $R_3$) del banco de memoria se entregarán a la ALU como operandos $A$ y $B$. Al recibir un pulso en btn2_pulse (BTN[2]), conmuta secuencialmente a través de 6 combinaciones predefinidas. Además, genera una máscara de 4 bits para los LEDs integrados, encendiendo únicamente los indicadores correspondientes a los dos registros en uso.
+
+Tabla de combinaciones y mapeo de LEDs
+
+| Estado      | Operando A   | Operando B    |  LEDs activos | Registros representados |
+|-------------|--------------|-------------- |---------------|-------------------------|
+|    3'd0     |2'd0 ($R_0$)  | 2'd1 ($R_1$)  | 4'b0011       | $R_0, R_1$              |
+|    3'd1     |2'd0 ($R_0$)  | 2'd2 ($R_2$)  | 4'b0101       | $R_0, R_2$              |
+|    3'd2     |2'd0 ($R_0$)  | 2'd3 ($R_3$)  | 4'b1001       | $R_0, R_3$              |
+|    3'd3     |2'd1 ($R_1$)  | 2'd2 ($R_2$)  | 4'b0110       | $R_1, R_2$              |
+|    3'd4     |2'd1 ($R_1$)  | 2 d3 ($R_3$)  | 4'b1010       | $R_1, R_3$              |
+|    3'd5     |2'd2 ($R_2$)  | 2'd3 ($R_3$)  | 4'b1100       | $R_2, R_3$              |
+
+### Unidad Aritmético-Lógica (alu.v)
+
+Descripción:
+
+La ALU es un bloque combinacional que procesa las entradas de 4 bits a y b según la operación seleccionada por el vector op[2:0]. La salida y tiene un ancho de 5 bits ($Y[4:0]$) para permitir la representación de acarreos o bits adicionales resultantes de operaciones aritméticas o desplazamientos.
+
+Tabla de Operaciones
+
 
 
 
