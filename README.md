@@ -121,5 +121,17 @@ Es el módulo jerárquico superior (Top Module). No realiza lógica de procesami
 
 ## Implementación en FPGA (Zybo Z7)
 
+## Análisis de Resultados
 
+El diseño modular implementado permitió aislar cada etapa del procesamiento. La incorporación de módulos de filtrado de rebote (debounce) fue fundamental para el correcto avance de las máquinas de estado de selección de registro y combinación de operandos.
+
+Por otro lado, la inclusión del latch de almacenamiento síncrono previo al módulo display_tm1637 cumplió satisfactoriamente con la restricción de diseño de mantener visible el resultado previo sin reflejar estados transitorios intermediate de los switches o registros.
+
+## Conclusiones
+
+- Se logró validar una arquitectura digital completa en la FPGA Zybo Z7 dividiendo las funciones en módulos desacoplados y fácilmente depurables.
+
+- El uso de un banco de registros de 4 posiciones y un selector de combinaciones permitió alimentar dinámicamente a la ALU de 4 bits sin necesidad de modificar el cableado o la lógica interna.
+
+- La estrategia de retención de datos en la etapa de visualización garantiza un comportamiento predecible del sistema, permitiendo al usuario configurar operandos e inspeccionar operaciones previas de manera clara.
 
