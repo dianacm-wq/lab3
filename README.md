@@ -127,7 +127,7 @@ Los botones mecánicos sufren de rebotes eléctricos al presionar. El módulo de
 
 Descripción
 
-La tarjeta Zybo Z7 proporciona un reloj principal (OriginalCLK) de $125\text{ MHz}$. Trabajar a esta frecuencia tan elevada dificulta el filtrado del rebote mecánico de los botones y la gestión temporal para periféricos lentos como la pantalla TM1637. El módulo DivFreq reduce la frecuencia de reloj del sistema a una frecuencia de trabajo adecuada (DivCLK) mediante un contador entero binario.   
+La tarjeta Zybo Z7 proporciona un reloj principal (OriginalCLK) de  $125\text{ MHz}$. Trabajar a esta frecuencia tan elevada dificulta el filtrado del rebote mecánico de los botones y la gestión temporal para periféricos lentos como la pantalla TM1637. El módulo DivFreq reduce la frecuencia de reloj del sistema a una frecuencia de trabajo adecuada (DivCLK) mediante un contador entero binario.   
 
 Principio de Funcionamiento:
 Utiliza un contador de 10 bits (contador) que incrementa con cada flanco de subida de OriginalCLK. Al alcanzar la cuenta límite de $599$, el contador se reinicia a $0$ y conmuta (toggle) el estado de la señal DivCLK. 
