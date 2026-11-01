@@ -93,7 +93,28 @@ Tabla de Operaciones
 |3'b110               | Shift Left  | y = {a, 1'b0}              |   Desplazamiento a la izquierda de $A$ (multiplicación por 2).   |
 |3'b111               | Shift Right | y = {2'b00, a[3:1]}        |   Desplazamiento a la derecha de $A$ (división entera por 2).    |
 
-### Módulo Anti-rebote y Gestión de Botones (debounce.v y botones.v)
+### Módulo Anti-rebote  (debounce.v)
+
+Descripción:
+Los botones físicos sufren transitorios mecánicos (rebotes) al presionarse o soltarse, generando múltiples pulsos en microsegundos. El módulo debounce implementa una Máquina de Estados Finitos (FSM) combinada con un temporizador de retardo para generar un único pulso limpio de duración de 1 ciclo de reloj por cada pulsación real.
+
+Principio de Funcionamiento de cada estado:
+- Estado 0 (Reposo): Espera a que la entrada del botón (btn_in) pase a alto (1).
+-  Estado 1 (Filtro de Rebote): Inicia la cuenta de un temporizador de 11 bits (cnt) hasta llegar a $2000$ ciclos de reloj. Esto introduce un retardo de estabilización mecánica ($\approx 19.2\text{ ms}$).
+-  Estado 2 (Verificación): Reinicia la cuenta e evalúa la señal. Si el botón sigue presionado, transita al Estado 3; si fue un ruido pasajero, va al Estado 4.
+-   Estado 3 (Generación de Pulso): La salida pulse se activa en 1 durante exactamente un ciclo de reloj y avanza al Estado 4.
+-   Estado 4 (Espera de Liberación): Mantiene la salida en 0 y espera a que el usuario suelte el botón (btn_in == 0) para retornar al Estado 0.   
+
+Entradas y salidas
+
+| Señal |Tipo    | Ancho (bits) | Descripción                                  |
+|-------|------  |--------------|-------------                                 |
+|clk    |Entrada |1             |Reloj del sistema preescalado (DivCLK).       |
+|reset  |Entrada |1             |Señal de reinicio global.                     |
+|btn_in |Entrada |1             | Entrada ruidosa proveniente del botón físico.|
+|pulse  |Salida  |1             |Pulso limpio de duración de 1 ciclo de reloj. |
+
+### Gestión de Botones (botones.v)
 
 Descripción
 
