@@ -19,13 +19,15 @@
 - Análisis de resultados
 
 ## Descripción del sistema
-Este sistema digital constituye una arquitectura modular de procesamiento de datos de 4 bits implementada en la tarjeta FPGA Zybo Z7. Inicialmente, el usuario ingresa un dato de 4 bits mediante los switches SW[3:0] para almacenarlo en el banco de registros ($R_0$ a $R_3$). El registro de destino se selecciona pulsando secuencialmente el botón BTN[0], e indicando la selección activa a través del LED RGB (asignando un color/estado específico para cada registro: $R_0$, $R_1$, $R_2$ y $R_3$). La escritura efectiva del dato en el registro seleccionado se realiza en el instante en que se presiona el botón BTN[1] (write_enable).
+Este sistema digital constituye una arquitectura modular de procesamiento de datos de 4 bits implementada en la tarjeta FPGA Zybo Z7.
 
-Posteriormente, mediante el módulo de selección secuencial (comb _ selector ), el usuario define la pareja de operandos ($A$ y $B$) que se enviarán a la ALU. La conmutación entre las distintas combinaciones de registros se realiza mediante el botón BTN[2], mientras que los LEDs [3:0] se encienden para indicar visualmente cuáles registros están participando en la operación activa.
+Inicialmente, el usuario ingresa un dato de 4 bits mediante los switches SW[3:0] para almacenarlo en el banco de registros ($R_0$ a $R_3$). El registro de destino se selecciona pulsando secuencialmente el botón BTN[0], e indicando la selección activa a través del estado interno del módulo. La escritura efectiva del dato en el registro seleccionado se realiza en el instante en que se presiona el botón BTN[1] (write_enable).
 
-La Unidad Aritmético-Lógica (ALU) recibe los operandos A y B y ejecuta la función seleccionada mediante los switches SW[2:0]. El repertorio de operaciones disponibles incluye operaciones aritméticas y lógicas: Suma, Resta, AND, OR, XOR, Desplazamiento e Identidad. 
+Posteriormente, mediante el módulo de selección secuencial (comb_selector), el usuario define la pareja de operandos ($A$ y $B$) que se enviarán a la ALU. La conmutación entre las distintas combinaciones de registros se realiza mediante el botón BTN[2], mientras que los LEDs LED[3:0] se encienden para indicar visualmente cuáles registros están participando en la operación activa.
 
-Finalmente, el resultado de 4 bits generado por la ALU no altera el banco de registros; en su lugar, se captura y almacena temporalmente en un registro de salida (latch) únicamente al presionar el botón BTN[3]. Dicho resultado se visualiza en un display de 7 segmentos (TM1637), conservando el último valor calculado hasta que el usuario vuelva a presionar BTN3 para ejecutar una nueva operación.
+La Unidad Aritmético-Lógica (ALU) recibe los operandos $A$ y $B$ y ejecuta la función seleccionada mediante los switches SW[2:0]. El repertorio de operaciones disponibles incluye operaciones aritméticas y lógicas: Suma, Resta, AND, OR, XOR, NOT, Desplazamiento a la izquierda y Desplazamiento a la derecha.
+
+Finalmente, el resultado generado por la ALU (de 5 bits para contemplar el acarreo/extensión) no altera el banco de registros; en su lugar, se captura y actualiza en la interfaz de salida únicamente al presionar el botón BTN[3]. Dicho resultado se visualiza en un display de 7 segmentos controlado mediante el protocolo del driver TM1637, conservando el último valor calculado de forma estable hasta que el usuario vuelva a presionar BTN[3].
 
 ## Explicación de la arquitectura modular
 ### Banco de registros (reg_bank.v):
@@ -62,6 +64,20 @@ Entradas y salidas del módulo:
 Descripción: 
 
 El módulo actúa como el organizador y enrutador secuencial de datos dentro de la arquitectura. Su función principal es seleccionar qué par de registros ($R_0$ a $R_3$) del banco de memoria se entregarán a la ALU como operandos $A$ y $B$. Al recibir un pulso en btn2_pulse (BTN[2]), conmuta secuencialmente a través de 6 combinaciones predefinidas. Además, genera una máscara de 4 bits para los LEDs integrados, encendiendo únicamente los indicadores correspondientes a los dos registros en uso.
+
+Entradas y salidas
+
+| | | | |
+
+
+
+
+
+
+
+
+
+
 
 Tabla de combinaciones y mapeo de LEDs
 
