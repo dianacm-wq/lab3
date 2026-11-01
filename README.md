@@ -10,6 +10,9 @@
     - Banco de registros (reg_bank.v)
     - Combinaciones de registros (comb_selector.v)
     - ALU (alu.v)
+    - Módulo Anti-rebote (debounce.v)
+    - Gestor de Botones (botones.v)
+    - Divisor de Frecuencia (DivFreq.v)
     - Módulo de visualización (display_tm1637.v)
     - Módulo de integración (top.v)
 - Simulaciones
@@ -117,7 +120,7 @@ Entradas y salidas
 |btn_in |Entrada |1             | Entrada ruidosa proveniente del botón físico.|
 |pulse  |Salida  |1             |Pulso limpio de duración de 1 ciclo de reloj. |
 
-### Gestión de Botones (botones.v)
+### Gestor de Botones (botones.v)
 
 Descripción
 
