@@ -17,9 +17,9 @@
     - Módulo de integración (top.v)
 - Simulaciones
 - Implementación de la FPGA
-    - Proyecto en Vivado
     - Funcionamiento en FPGA (Video)
 - Análisis de resultados
+- Conclusiones
 
 ## Descripción del sistema
 Este sistema digital constituye una arquitectura modular de procesamiento de datos de 4 bits implementada en la tarjeta FPGA Zybo Z7.
@@ -37,7 +37,7 @@ Finalmente, el resultado generado por la ALU (de 5 bits para contemplar el acarr
 ### Banco de registros (reg_bank.v):
  Descripción: 
  
-Este módulo se encarga de almacenar los operandos de 4 bits que el usuario ingresa mediante los switches. Permite guardar datos en una memoria síncrona de 4 posiciones ($R_0$ a $R_3$) e incluye un puntero interno (estado) que avanza cíclicamente de $0$ a $3$ al recibir un pulso en la señal write_addr (BTN[0]). La escritura solo ocurre en el registro apuntado si write_enable (BTN[1]) se encuentra activo.
+Este módulo se encarga de almacenar los operandos de 4 bits que el usuario ingresa mediante los switches. Permite guardar datos en una memoria síncrona de 4 posiciones ($R_0$ a $R_3$) e incluye estados internos que avanzan cíclicamente de $0$ a $3$ al recibir un pulso en la señal write_addr (BTN[0]). La escritura solo ocurre en el registro apuntado si write_enable (BTN[1]) se encuentra activo.
 Para brindar retroalimentación visual al usuario en la Zybo Z7, cada registro seleccionado se identifica con un color en el LED RGB:
 
 |   Código  |  Registro | Estado LED RGB|
@@ -128,7 +128,7 @@ Los botones mecánicos sufren de rebotes eléctricos al presionar. El módulo de
 
 Entradas y salidas
 
-| Señal | Tipo      | Ancho (bits) | Descripción                            |
+| Señal | Tipo      | Ancho (bits) | Descripción                                                 |
 |-------|-----------|--------------|-------------                                                |
 |CLK    |Entrada    |1             |Reloj preescalado del sistema (DivCLK).                      |
 |reset  |Entrada    |1             | Reinicio asíncrono.                                         |
@@ -181,8 +181,17 @@ Es el módulo jerárquico superior (Top Module). No realiza lógica de procesami
 ##  Simulaciones y Verificación
 
 ###  Capturas obtenidas en GTKWave
+ Banco de registros (reg_bank.v)
+Combinaciones de registros (comb_selector.v)
+ALU (alu.v)
+Módulo Anti-rebote (debounce.v)
+Gestor de Botones (botones.v)
+Divisor de Frecuencia (DivFreq.v)
+Módulo de visualización (display_tm1637.v)
 
 ## Implementación en FPGA (Zybo Z7)
+ 
+ ### Funcionamiento en FPGA (Video)
 
 ## Análisis de Resultados
 
