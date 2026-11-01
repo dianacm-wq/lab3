@@ -110,13 +110,16 @@ La tarjeta Zybo Z7 proporciona un reloj principal (OriginalCLK) de $125\text{ MH
 Principio de Funcionamiento:
 Utiliza un contador de 10 bits (contador) que incrementa con cada flanco de subida de OriginalCLK. Al alcanzar la cuenta límite de $599$, el contador se reinicia a $0$ y conmuta (toggle) el estado de la señal DivCLK. 
 
-$$f_{\text{salida}} = \frac{f_{\text{original}}}{2 \times (N + 1)} = \frac{125\text{ MHz}}{2 \times (599 + 1)} = \frac{125\text{ MHz}}{1200} \approx 104.16\text{ kHz}$$
+$$f_{\text{salida}} = \frac{f_{\text{original}}}{2 \times (N+ 1)} = \frac{125\text{ MHz}}{2 \times (599 + 1)} = \frac{125\text{ MHz}}{1200} \approx 104.16\text{ kHz}$$
 
 Entradas y salidas:
 
 | Señal | Tipo   | Ancho (bits) | Descripción                                               |
 |------ |-----   |------------- |------------                                               |
 |CLK    |Entrada | 1            |Reloj principal de entrada de la FPGA ($125\text{ MHz}$).  |
+|reset  |Entrada | 1            |Reinicio asíncrono que restablece el contador a $0$.       |
+|DivCLK |Salida  | 1            |Reloj dividido de salida ($\approx 104.16\text{ kHz}$).    |
+
 
 ### Módulo de visualización (display_tm1637.v)
 
