@@ -65,20 +65,6 @@ Descripción:
 
 El módulo actúa como el organizador y enrutador secuencial de datos dentro de la arquitectura. Su función principal es seleccionar qué par de registros ($R_0$ a $R_3$) del banco de memoria se entregarán a la ALU como operandos $A$ y $B$. Al recibir un pulso en btn2_pulse (BTN[2]), conmuta secuencialmente a través de 6 combinaciones predefinidas. Además, genera una máscara de 4 bits para los LEDs integrados, encendiendo únicamente los indicadores correspondientes a los dos registros en uso.
 
-Entradas y salidas
-
-| | | | |
-
-
-
-
-
-
-
-
-
-
-
 Tabla de combinaciones y mapeo de LEDs
 
 | Estado      | Operando A   | Operando B    |  LEDs activos | Registros representados |
@@ -128,8 +114,9 @@ $$f_{\text{salida}} = \frac{f_{\text{original}}}{2 \times (N + 1)} = \frac{125\t
 
 Entradas y salidas:
 
-| Señal | Tipo | Ancho (bits) | Descripción |
-|------ |----- |------------- |------------ |
+| Señal | Tipo   | Ancho (bits) | Descripción                                               |
+|------ |-----   |------------- |------------                                               |
+|CLK    |Entrada | 1            |Reloj principal de entrada de la FPGA ($125\text{ MHz}$).  |
 
 ### Módulo de visualización (display_tm1637.v)
 
