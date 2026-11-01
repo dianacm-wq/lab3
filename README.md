@@ -129,10 +129,11 @@ Los botones mecánicos sufren de rebotes eléctricos al presionar. El módulo de
 Entradas y salidas
 
 | Señal | Tipo      | Ancho (bits) | Descripción                            |
-|-------|-----------|--------------|-------------                                              |
-|CLK    |Entrada    |1             |Reloj preescalado del sistema (DivCLK).                    |
-|reset  |Entrada    |1             | Reinicio asíncrono.                                       |
-|BTN    | Entrada   |4             | Bus con los 4 botones físicos de la Zybo Z7 (BTN0 a BTN3).|
+|-------|-----------|--------------|-------------                                                |
+|CLK    |Entrada    |1             |Reloj preescalado del sistema (DivCLK).                      |
+|reset  |Entrada    |1             | Reinicio asíncrono.                                         |
+|BTN    | Entrada   |4             | Bus con los 4 botones físicos de la Zybo Z7 (BTN0 a BTN3).  |
+|pulso  |Salida     |4             |Bus de pulsos filtrados asignados a cada función del sistema.|
 
 ### Divisor de Frecuencia (DivFreq.v)
 
@@ -158,7 +159,18 @@ Entradas y salidas:
 
 Descripción
 
-Recibe el resultado de 5 bits generado por la ALU y el pulso CambioAlu (BTN[3]). Al presionar BTN[3], se actualiza el registro interno de captura (latch) con el valor actual de ALUin. Este módulo se encarga de transmitir en formato de protocolo serie de dos hilos (CLKtm y DIO) la información hacia el controlador del display de 7 segmentos TM1637.
+Este módulo se encarga de recibe el resultado de 5 bits generado por la ALU y el pulso CambioAlu (BTN[3]). Al presionar BTN[3], se actualiza el registro interno de captura (latch) con el valor actual de ALUin. Adicionalmente este módulo se encarga de transmitir en formato de protocolo serie de dos hilos (CLKtm y DIO) la información hacia el controlador del display de 7 segmentos TM1637.
+
+Entradas y salidas
+
+|Señal     | Tipo          | Ancho (bits) | Descripción                                                     |
+|----------|---------------|--------------|----------------------------                                     |
+|clk       | Entrada       |1             |Reloj del sistema (DivCLK).                                      |
+|reset     |Entrada        |1             |Reinicio global.                                                 |
+|ALUin     |Entrada        |5             |Bus con el resultado inmediato generado por la ALU (y[4:0]).     |
+|CambioAlu |Entrada        |1             |Pulso del botón BTN3 (pulso[3]) para habilitar la actualización. |
+|tm_clk    |Salida         |1             |Línea de reloj serial de la interfaz TM1637 (CLKtm).             |
+|tm_dio    |Salida / Inout |1             |Línea de datos seriales bidireccional (DIO).                     |
 
 ### Módulo de integración (top.v)
 
