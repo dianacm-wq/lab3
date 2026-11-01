@@ -123,6 +123,12 @@ Descripción
 
 Los botones mecánicos sufren de rebotes eléctricos al presionar. El módulo debounce implementa una máquina de estados finitos (FSM) asistida por un contador síncrono que filtra las transiciones espurias y entrega un único pulso limpio de un ciclo de reloj por cada pulsación real. El módulo botones instancia cuatro unidades de filtrado para acondicionar los botones BTN0 a BTN3.
 
+Entradas y salidas
+
+| Señal | Tipo      | Ancho (bits) | Descripción |
+|-------|-----------|--------------|-------------|
+|
+
 ### Divisor de Frecuencia (DivFreq.v)
 
 Descripción
