@@ -128,9 +128,11 @@ Los botones mecánicos sufren de rebotes eléctricos al presionar. El módulo de
 
 Entradas y salidas
 
-| Señal | Tipo      | Ancho (bits) | Descripción |
-|-------|-----------|--------------|-------------|
-|
+| Señal | Tipo      | Ancho (bits) | Descripción                            |
+|-------|-----------|--------------|-------------                                              |
+|CLK    |Entrada    |1             |Reloj preescalado del sistema (DivCLK).                    |
+|reset  |Entrada    |1             | Reinicio asíncrono.                                       |
+|BTN    | Entrada   |4             | Bus con los 4 botones físicos de la Zybo Z7 (BTN0 a BTN3).|
 
 ### Divisor de Frecuencia (DivFreq.v)
 
