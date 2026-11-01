@@ -117,7 +117,19 @@ Los botones mecánicos sufren de rebotes eléctricos al presionar. El módulo de
 
 ### Divisor de Frecuencia (DivFreq.v)
 
-DescripciónLa FPGA Zybo Z7 entrega un reloj principal de $125 \text{ MHz}$. El módulo DivFreq reduce la frecuencia de reloj mediante un contador de 10 bits ($0 \text{ a } 599$) para generar una señal DivCLK utilizable por los módulos de control y debounce, evitando lecturas incorrectas por alta velocidad de muestreo.
+Descripción
+
+La tarjeta Zybo Z7 proporciona un reloj principal (OriginalCLK) de $125\text{ MHz}$. Trabajar a esta frecuencia tan elevada dificulta el filtrado del rebote mecánico de los botones y la gestión temporal para periféricos lentos como la pantalla TM1637. El módulo DivFreq reduce la frecuencia de reloj del sistema a una frecuencia de trabajo adecuada (DivCLK) mediante un contador entero binario.   
+
+Principio de Funcionamiento:
+Utiliza un contador de 10 bits (contador) que incrementa con cada flanco de subida de OriginalCLK. Al alcanzar la cuenta límite de $599$, el contador se reinicia a $0$ y conmuta (toggle) el estado de la señal DivCLK. 
+
+$$f_{\text{salida}} = \frac{f_{\text{original}}}{2 \times (N + 1)} = \frac{125\text{ MHz}}{2 \times (599 + 1)} = \frac{125\text{ MHz}}{1200} \approx 104.16\text{ kHz}$$
+
+Entradas y salidas:
+
+| Señal | Tipo | Ancho (bits) | Descripción |
+|------ |----- |------------- |------------ |
 
 ### Módulo de visualización (display_tm1637.v)
 
