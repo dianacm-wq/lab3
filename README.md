@@ -202,16 +202,18 @@ Es el módulo jerárquico superior (Top Module). No realiza lógica de procesami
  
 https://drive.google.com/drive/folders/1x_4HrH6c9QFBktMU9a3DDq7Sq63LrpKO
 
-
-
-
-
-
 ## Análisis de Resultados
+1. Aislamiento Físico y Funcional mediante Diseño Modular: La metodología de diseño modular implementada permitió desacoplar las diferentes etapas de la arquitectura digital (almacenamiento en reg_bank.v, enrutamiento de operandos en comb_selector.v, procesamiento en alu.v y despliegue en display_tm1637.v). Este aislamiento funcional ofreció ventajas operativas determinantes durante la etapa de pruebas:
 
-El diseño modular implementado permitió aislar cada etapa del procesamiento. La incorporación de módulos de filtrado de rebote (debounce) fue fundamental para el correcto avance de las máquinas de estado de selección de registro y combinación de operandos.
+- Depuración independiente: Cada módulo pudo simularse de forma individual mediante sus respectivos testbenches, asegurando que los fallos lógicos se corrigieran antes de la integración en el top-level (top3.v).
+-  Modularidad del flujo de datos: La ALU opera de forma puramente combinacional calculando el resultado de forma instantánea a partir de las entradas proporcionadas por el banco de registros, sin preocuparse por la sincronización de las lecturas ni por la física del display serial.
 
-Por otro lado, la inclusión del latch de almacenamiento síncrono previo al módulo display_tm1637 cumplió satisfactoriamente con la restricción de diseño de mantener visible el resultado previo sin reflejar estados transitorios intermediate de los switches o registros.
+ 2. Impacto del Filtrado Anti-rebote (debounce.v) en las Máquinas de EstadoLa inclusión de los módulos de filtrado de rebote (debounce.v) fue un factor crítico para garantizar la estabilidad del sistema. Los botones mecánicos de la tarjeta Zybo Z7 generan múltiples transitorios inductivos y capacitivos (rebotes) durante los primeros milisegundos de cada pulsación.   Sin el filtrado de rebote:
+ 
+ - El módulo reg_bank.v capturaba múltiples flancos falsos al presionar BTN0, haciendo que el puntero de selección de registro avanzara aleatoriamente a través de varios estados ($R0 \rightarrow R3$) en una sola pulsación.
+ - De manera análoga, el selector de combinaciones (comb_selector.v) se saltaba pares de operandos de forma impredecible al pulsar BTN2.
+
+Con la implementación de la FSM de 5 estados con retardo de $\approx 19.2\text{ ms}$ en debounce.v, el sistema garantiza la generación de un único pulso de un ciclo de reloj por cada acción del usuario. Esto asegura que la selección de registros y la conmutación de combinaciones ocurran exactamente de un estado a la vez, garantizando un avance determinista en las máquinas de estado.   3. Estabilidad de la Visualización mediante el Latch de SalidaLa restricción del sistema exigía conservar el valor de la última operación ejecutada sin mostrar valores transitorios. Para dar cumplimiento a esta regla, el registro de retención tipo latch integrado a la entrada del módulo display_tm1637.v actuó como una barrera de sincronización entre la ALU y la pantalla.   Aislamiento de estados combinacionales: Mientras el usuario modifica los switches de operación (SW[2:0]), cambia los datos de entrada (SW[3:0]) o conmuta la pareja de operandos con BTN2, la salida combinacional de la ALU cambia inmediatamente. Sin el latch, la pantalla TM1637 transmitiría constantemente estos cambios intermedios, generando parpadeos continuos y lecturas erróneas.   Captura síncrona: La retención síncrona solo habilita el registro de actualización al detectar el pulso limpio generado por BTN3 (pulso[3]). Esto garantiza que la información mostrada en los 7 segmentos sea inmune a las variaciones posteriores en los switches o en el banco de registros, cumpliendo al 100% con la especificación de diseño del laboratorio. 
 
 ## Conclusiones
 
