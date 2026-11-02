@@ -199,6 +199,12 @@ Es el módulo jerárquico superior (Top Module). No realiza lógica de procesami
 ## Implementación en FPGA (Zybo Z7)
  
  ### Funcionamiento en FPGA (Video)
+ 
+https://drive.google.com/drive/folders/1x_4HrH6c9QFBktMU9a3DDq7Sq63LrpKO
+
+
+
+
 
 
 ## Análisis de Resultados
