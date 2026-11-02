@@ -213,7 +213,7 @@ https://drive.google.com/drive/folders/1x_4HrH6c9QFBktMU9a3DDq7Sq63LrpKO
  - El módulo reg_bank.v capturaba múltiples flancos falsos al presionar BTN0, haciendo que el puntero de selección de registro avanzara aleatoriamente a través de varios estados ($R0 \rightarrow R3$) en una sola pulsación.
  - De manera análoga, el selector de combinaciones (comb_selector.v) se saltaba pares de operandos de forma impredecible al pulsar BTN2.
 
-Con la implementación de la FSM de 5 estados con retardo de $\approx 19.2\text{ ms}$ en debounce.v, el sistema garantiza la generación de un único pulso de un ciclo de reloj por cada acción del usuario. Esto asegura que la selección de registros y la conmutación de combinaciones ocurran exactamente de un estado a la vez.  
+Con la implementación de la FSM de 5 estados con retardo de $\approx 19.2\text{ ms }$ en debounce.v, el sistema garantiza la generación de un único pulso de un ciclo de reloj por cada acción del usuario. Esto asegura que la selección de registros y la conmutación de combinaciones ocurran exactamente de un estado a la vez.  
 
 3. Estabilidad de la Visualización mediante el Latch de Salida: La restricción del sistema exigía conservar el valor de la última operación ejecutada sin mostrar valores transitorios. Para dar cumplimiento a esta regla, el registro de retención tipo latch integrado a la entrada del módulo display_tm1637.v actuó como una barrera de sincronización entre la ALU y la pantalla.
 
