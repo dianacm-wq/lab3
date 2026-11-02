@@ -178,20 +178,28 @@ Descripción
 
 Es el módulo jerárquico superior (Top Module). No realiza lógica de procesamiento de datos directamente; su rol se limita a instanciar e interconectar las entradas y salidas físicas de la Zybo Z7 (Switches, Botones, LEDs, Display) con las entradas y salidas de los submódulos (DivFreq, botones, comb_selector, reg_bank, alu, display_tm1637).
 
-##  Simulaciones y Verificación
+##  Simulaciones 
 
 ###  Capturas obtenidas en GTKWave
- Banco de registros (reg_bank.v)
-Combinaciones de registros (comb_selector.v)
-ALU (alu.v)
-Módulo Anti-rebote (debounce.v)
-Gestor de Botones (botones.v)
-Divisor de Frecuencia (DivFreq.v)
-Módulo de visualización (display_tm1637.v)
+- Banco de registros (reg_bank.v)
+<img width="1366" height="696" alt="{01710E1A-56C3-4635-BD83-D47C3B2609E4}" src="https://github.com/user-attachments/assets/7b98594b-8349-42c6-ab77-baee8e96409c" />
+
+- Combinaciones de registros (comb_selector.v)
+
+<img width="1364" height="697" alt="{C7A8E30A-A133-4E19-A9FB-02500FFBC123}" src="https://github.com/user-attachments/assets/6b46ffde-8b93-4b77-b4f8-0101093cc6f2" />
+
+- ALU (alu.v)
+
+<img width="1366" height="700" alt="{59B9AAFE-C317-40F8-9BDF-F6207D5CA25B}" src="https://github.com/user-attachments/assets/ee379731-00e7-4962-95d8-0e424f9981f4" />
+
+- Módulo de visualización (display_tm1637.v)
+
+<img width="1366" height="694" alt="{9653510F-4AD9-4BB7-B1FE-034521AABE9D}" src="https://github.com/user-attachments/assets/a2ff44e8-18a5-4d51-879f-9c91f956960f" />
 
 ## Implementación en FPGA (Zybo Z7)
  
  ### Funcionamiento en FPGA (Video)
+
 
 ## Análisis de Resultados
 
