@@ -1,0 +1,183 @@
+$date
+	Fri Oct 23 17:41:33 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_comb_selector $end
+$var wire 2 ! sel_B [1:0] $end
+$var wire 2 " sel_A [1:0] $end
+$var wire 4 # leds [3:0] $end
+$var reg 1 $ btn2_pulse $end
+$var reg 1 % clk $end
+$var reg 1 & reset $end
+$scope module uut $end
+$var wire 1 $ btn2_pulse $end
+$var wire 1 % clk $end
+$var wire 1 & reset $end
+$var reg 3 ' estado [2:0] $end
+$var reg 4 ( leds [3:0] $end
+$var reg 2 ) sel_A [1:0] $end
+$var reg 2 * sel_B [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b1 *
+b0 )
+b11 (
+b0 '
+1&
+0%
+0$
+b11 #
+b0 "
+b1 !
+$end
+#5000
+1%
+#10000
+0%
+#15000
+1%
+#20000
+0%
+0&
+#25000
+1%
+#30000
+0%
+#35000
+b101 #
+b101 (
+b10 !
+b10 *
+b1 '
+1%
+1$
+#40000
+0%
+#45000
+1%
+0$
+#50000
+0%
+#55000
+1%
+#60000
+0%
+1$
+#65000
+b1001 #
+b1001 (
+b11 !
+b11 *
+b10 '
+1%
+#70000
+0%
+0$
+#75000
+1%
+#80000
+0%
+#85000
+b110 #
+b110 (
+b10 !
+b10 *
+b1 "
+b1 )
+b11 '
+1%
+1$
+#90000
+0%
+#95000
+1%
+0$
+#100000
+0%
+#105000
+1%
+#110000
+0%
+1$
+#115000
+b1010 #
+b1010 (
+b11 !
+b11 *
+b100 '
+1%
+#120000
+0%
+0$
+#125000
+1%
+#130000
+0%
+#135000
+b1100 #
+b1100 (
+b10 "
+b10 )
+b101 '
+1%
+1$
+#140000
+0%
+#145000
+1%
+0$
+#150000
+0%
+#155000
+1%
+#160000
+0%
+1$
+#165000
+b11 #
+b11 (
+b1 !
+b1 *
+b0 "
+b0 )
+b0 '
+1%
+#170000
+0%
+0$
+#175000
+1%
+#180000
+0%
+#185000
+b101 #
+b101 (
+b10 !
+b10 *
+b1 '
+1%
+1$
+#190000
+0%
+#195000
+1%
+0$
+#200000
+0%
+#205000
+1%
+#210000
+0%
+#215000
+1%

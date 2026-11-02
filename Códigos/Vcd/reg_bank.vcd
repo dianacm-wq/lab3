@@ -1,0 +1,144 @@
+$date
+	Fri Oct 23 17:45:39 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_reg_bank $end
+$var wire 4 ! out_b [3:0] $end
+$var wire 4 " out_a [3:0] $end
+$var reg 2 # addr_a [1:0] $end
+$var reg 2 $ addr_b [1:0] $end
+$var reg 1 % clk $end
+$var reg 4 & data_in [3:0] $end
+$var reg 1 ' reset $end
+$var reg 1 ( write_addr $end
+$var reg 1 ) write_enable $end
+$scope module uut $end
+$var wire 2 * addr_a [1:0] $end
+$var wire 2 + addr_b [1:0] $end
+$var wire 1 % clk $end
+$var wire 4 , data_in [3:0] $end
+$var wire 4 - out_a [3:0] $end
+$var wire 4 . out_b [3:0] $end
+$var wire 1 ' reset $end
+$var wire 1 ( write_addr $end
+$var wire 1 ) write_enable $end
+$var reg 2 / estado [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 /
+b0 .
+b0 -
+b0 ,
+b1 +
+b0 *
+0)
+0(
+1'
+b0 &
+0%
+b1 $
+b0 #
+b0 "
+b0 !
+$end
+#5000
+1%
+#10000
+0%
+#15000
+1%
+#20000
+0%
+1)
+b1010 &
+b1010 ,
+0'
+#25000
+b1010 "
+b1010 -
+1%
+#30000
+0%
+1(
+0)
+#35000
+b1 /
+1%
+#40000
+0%
+1)
+b1011 &
+b1011 ,
+0(
+#45000
+b1011 !
+b1011 .
+1%
+#50000
+0%
+1(
+0)
+#55000
+b10 /
+1%
+#60000
+0%
+1)
+b1100 &
+b1100 ,
+0(
+#65000
+1%
+#70000
+0%
+1(
+0)
+#75000
+b11 /
+1%
+#80000
+0%
+1)
+b1101 &
+b1101 ,
+0(
+#85000
+1%
+#90000
+0%
+0)
+#95000
+1%
+#100000
+0%
+b1100 !
+b1100 .
+b10 $
+b10 +
+#105000
+1%
+#110000
+0%
+b1101 !
+b1101 .
+b11 $
+b11 +
+b1011 "
+b1011 -
+b1 #
+b1 *
+#115000
+1%
+#120000
+0%
